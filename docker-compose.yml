@@ -1,6 +1,18 @@
 version: '3.3'
 
 services:
+  socat:
+    image: alpine/socat
+    container_name: socat_proxy
+    restart: always
+    networks:
+      - jenkins
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 127.0.0.1:2376:2375 
+    command: "tcp-listen:2375,fork,reuseaddr unix-connect:/var/run/docker.sock"
+
   jenkins:
     build: .
     image: myjenkins-blueocean:latest
@@ -34,3 +46,13 @@ networks:
 #   --volume jenkins-data:/var/jenkins_home \
 #   --volume jenkins-docker-certs:/certs/client:ro \
 #   myjenkins-blueocean:latest
+
+# docker run -d 
+#   --restart=always 
+#   -p 127.0.0.1:2376:2375 
+#   --network jenkins 
+#   -v /var/run/docker.sock:/var/run/docker.sock 
+#   alpine/socat 
+#   tcp-listen:2375,fork,reuseaddr 
+#   unix-connect:/var/run/docker.sock
+
