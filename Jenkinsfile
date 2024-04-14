@@ -1,6 +1,8 @@
 pipeline {
     agent {
         node {
+            // Cloud node with this label should be setup under:
+            //   "Manage Jenkins" | Clouds | docker | "Docker Agent Template"
             label 'docker-agent-python'
         }
     }
