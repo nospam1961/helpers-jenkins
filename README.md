@@ -48,9 +48,13 @@ Since jenkins runs in a docker container, docker host URI will not be able to re
 Special `proxy` container needed to forward traffic from Jenkins to Docker on the Host machine.
 More info: ttps://stackoverflow.com/questions/47709208/how-to-find-docker-host-uri-to-be-used-in-jenkins-docker-plugin
 #### Proxy container: alpine/socat
-```
+```shell
 $ docker run -d --restart=always -p 127.0.0.1:2376:2375 --network jenkins -v /var/run/docker.sock:/var/run/docker.sock alpine/socat tcp-listen:2375,fork,reuseaddr unix-connect:/var/run/docker.sock
+```
 
 # Get IP address to be used from within Jenkins
+```shell
 $ docker inspect <container_id> | grep IPAddress
+# or
+$ docker inspect socat_proxy | grep IPAddress
 ```

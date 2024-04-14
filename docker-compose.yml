@@ -21,8 +21,10 @@ services:
       - "58080:8080" # Host:Container
       - "50000:50000" # Host:Controller for communications betw Jenkins and Agents
     volumes:
-      - jenkins-data:/var/jenkins_home
-      - jenkins-docker-certs:/certs/client:ro
+      - ./data:/var/jenkins_home
+      - ./config:/certs/client:ro
+      # - jenkins-data:/var/jenkins_home
+      # - jenkins-docker-certs:/certs/client:ro
     restart: on-failure
     networks:
       - jenkins
@@ -31,9 +33,9 @@ services:
       - DOCKER_CERT_PATH=/certs/client
       - DOCKER_TLS_VERIFY=1
 
-volumes:
-  jenkins-data:
-  jenkins-docker-certs:
+# volumes:
+#   jenkins-data:
+#   jenkins-docker-certs:
 
 networks:
   jenkins:
