@@ -13,7 +13,10 @@ pipeline {
                 echo "Building.."
                 sh '''
                 cd myapp
+                python -m venv ./.venv
+                . ./.venv/bin/activate
                 pip install -r requirements.txt
+                deactivate
                 '''
             }
         }
@@ -22,8 +25,10 @@ pipeline {
                 echo "Testing.."
                 sh '''
                 cd myapp
+                . ./.venv/bin/activate
                 python3 hello.py
                 python3 hello.py --name=Donald
+                deactivate
                 '''
             }
         }
