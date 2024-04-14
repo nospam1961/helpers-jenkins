@@ -1,5 +1,5 @@
 FROM jenkins/jenkins:latest 
-USER root # use root
+USER root
 
 # Update and install python stuff
 RUN apt-get update && apt-get install -y lsb-release python3-pip
