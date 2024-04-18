@@ -7,7 +7,7 @@ pipeline {
         }
     }
     triggers {
-        pollSCM 'H/5 * * * *'
+        pollSCM 'H H/1 * * *'
     }
     stages {
         stage('Build') {
@@ -29,7 +29,7 @@ pipeline {
                 cd myapp
                 . .venv/bin/activate
                 python3 hello.py
-                python3 hello.py --name=Donald
+                python3 hello.py --name=Andrew
                 deactivate
                 '''
             }
