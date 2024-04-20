@@ -39,7 +39,7 @@ pipeline {
             steps {
                 echo 'Deliver....'
                 sh '''
-                echo "doing delivery stuff.."
+                echo "Doing delivery stuff.."
                 '''
             }
         }
